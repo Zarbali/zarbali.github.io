@@ -305,17 +305,23 @@
   max-width: 800px;
   position: relative;
   z-index: 1;
+  margin: 0 auto;
+  padding: 0;
+  width: 100%;
+  text-align: center;
 }
 
 .hero__title {
   font-size: clamp(var(--font-size-3xl), 5vw, var(--font-size-5xl));
-  margin-bottom: var(--spacing-md);
+  margin: 0 auto var(--spacing-md);
   background: var(--gradient-primary);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   animation: gradient-shift 3s ease infinite;
   background-size: 200% 200%;
+  text-align: center;
+  width: 100%;
 }
 
 @keyframes gradient-shift {
@@ -335,21 +341,29 @@
 .hero__subtitle {
   font-size: var(--font-size-2xl);
   color: var(--color-text-secondary);
-  margin-bottom: var(--spacing-lg);
+  margin: 0 auto var(--spacing-lg);
+  text-align: center;
+  width: 100%;
 }
 
 .hero__description {
   font-size: var(--font-size-lg);
   color: var(--color-text-secondary);
-  margin-bottom: var(--spacing-2xl);
+  margin: 0 auto var(--spacing-2xl);
+  text-align: center;
   line-height: var(--line-height-relaxed);
+  width: 100%;
+  max-width: 100%;
 }
 
 .hero__actions {
   display: flex;
   gap: var(--spacing-md);
   justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
+  margin: 0 auto;
+  width: 100%;
 }
 
 /* About Section */
