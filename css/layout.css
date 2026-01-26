@@ -1,0 +1,88 @@
+/**
+ * Layout Styles
+ * 
+ * Почему отдельный файл для layout:
+ * - Responsive design, медиа-запросы
+ * - Grid и Flexbox для структуры страницы
+ * - Адаптация под разные устройства
+ */
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  :root {
+    --container-padding: var(--spacing-md);
+    --spacing-4xl: var(--spacing-3xl);
+  }
+  
+  .nav__menu {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    right: 0;
+    background-color: var(--color-bg);
+    flex-direction: column;
+    padding: var(--spacing-lg);
+    border-bottom: 1px solid var(--color-border);
+    transform: translateX(-100%);
+    transition: transform var(--transition-base);
+  }
+  
+  .nav__menu.active {
+    transform: translateX(0);
+  }
+  
+  .nav__toggle {
+    display: flex;
+  }
+  
+  .hero__actions {
+    flex-direction: column;
+  }
+  
+  .btn {
+    width: 100%;
+  }
+  
+  .skills__grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+  
+  .projects__grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .contact__links {
+    flex-direction: column;
+  }
+  
+  .contact__link {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero__title {
+    font-size: var(--font-size-3xl);
+  }
+  
+  .section__title {
+    font-size: var(--font-size-3xl);
+  }
+  
+  .skills__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .nav,
+  .footer {
+    display: none;
+  }
+  
+  section {
+    page-break-inside: avoid;
+  }
+}
+
