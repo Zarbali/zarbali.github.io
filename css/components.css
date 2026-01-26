@@ -272,10 +272,10 @@
 .hero::before {
   content: '';
   position: absolute;
-  top: -150%;
-  left: -150%;
-  width: 500%;
-  height: 500%;
+  top: -200%;
+  left: -200%;
+  width: 600%;
+  height: 600%;
   background: var(--gradient-hero);
   animation: rotate 60s linear infinite;
   opacity: 0.3;
