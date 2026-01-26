@@ -1,80 +1,100 @@
 /**
  * Data Module
  * 
- * Почему отдельный файл для данных:
- * - Разделение данных и логики (separation of concerns)
- * - Легко обновлять контент без изменения кода
- * - Можно в будущем загружать данные из API
- * - Чистая структура проекта
+ * Why separate data file:
+ * - Separation of concerns (data vs logic)
+ * - Easy to update content without changing code
+ * - Can load from API in the future
+ * - Clean project structure
  */
 
 const skillsData = [
   {
-    name: 'HTML5',
-    level: 'Продвинутый',
-    icon: '🌐'
+    name: 'Python',
+    level: 'Advanced',
+    icon: '🐍'
   },
   {
-    name: 'CSS3',
-    level: 'Продвинутый',
-    icon: '🎨'
+    name: 'TensorFlow',
+    level: 'Intermediate',
+    icon: '🧠'
   },
   {
-    name: 'JavaScript',
-    level: 'Средний',
-    icon: '⚡'
+    name: 'PyTorch',
+    level: 'Intermediate',
+    icon: '🔥'
+  },
+  {
+    name: 'NumPy',
+    level: 'Advanced',
+    icon: '🔢'
+  },
+  {
+    name: 'Pandas',
+    level: 'Advanced',
+    icon: '🐼'
+  },
+  {
+    name: 'Scikit-learn',
+    level: 'Intermediate',
+    icon: '📊'
+  },
+  {
+    name: 'Machine Learning',
+    level: 'Intermediate',
+    icon: '🤖'
+  },
+  {
+    name: 'Deep Learning',
+    level: 'Intermediate',
+    icon: '🧬'
   },
   {
     name: 'Git',
-    level: 'Средний',
+    level: 'Intermediate',
     icon: '📦'
   },
   {
-    name: 'Responsive Design',
-    level: 'Продвинутый',
-    icon: '📱'
-  },
-  {
-    name: 'Web Performance',
-    level: 'Средний',
-    icon: '🚀'
+    name: 'Data Analysis',
+    level: 'Intermediate',
+    icon: '📈'
   }
 ];
 
 const projectsData = [
   {
-    title: 'Portfolio Website',
-    description: 'Персональный сайт-портфолио с современным дизайном и адаптивной версткой. Демонстрирует навыки frontend разработки.',
-    tags: ['HTML', 'CSS', 'JavaScript'],
-    links: {
-      demo: '#',
-      code: 'https://github.com/yourusername/yourusername.github.io'
-    },
-    image: '💼'
-  },
-  {
-    title: 'Task Manager',
-    description: 'Веб-приложение для управления задачами с локальным хранением данных. Реализованы CRUD операции и фильтрация.',
-    tags: ['JavaScript', 'LocalStorage', 'CSS'],
+    title: 'Project Coming Soon',
+    description: 'University AI project completed with excellent grade. Details will be added soon.',
+    tags: ['AI', 'Python', 'Machine Learning'],
     links: {
       demo: '#',
       code: '#'
     },
-    image: '✅'
+    image: '🚀'
   },
   {
-    title: 'Weather App',
-    description: 'Приложение для просмотра погоды с использованием открытого API. Показывает текущую погоду и прогноз.',
-    tags: ['JavaScript', 'API', 'Async'],
+    title: 'Project Coming Soon',
+    description: 'Independent university assignment demonstrating AI implementation skills.',
+    tags: ['Deep Learning', 'Neural Networks'],
     links: {
       demo: '#',
       code: '#'
     },
-    image: '🌤️'
+    image: '🧠'
+  },
+  {
+    title: 'Project Coming Soon',
+    description: 'AI project showcasing practical application of machine learning concepts.',
+    tags: ['Data Science', 'AI Libraries'],
+    links: {
+      demo: '#',
+      code: '#'
+    },
+    image: '💡'
   }
 ];
 
-// Экспорт данных для использования в других модулях
+// Export data for use in other modules
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = { skillsData, projectsData };
 }

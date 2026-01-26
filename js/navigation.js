@@ -1,10 +1,10 @@
 /**
  * Navigation Module
  * 
- * Почему отдельный модуль:
- * - Инкапсуляция логики навигации
- * - Легко тестировать и поддерживать
- * - Можно переиспользовать в других проектах
+ * Why separate module:
+ * - Encapsulates navigation logic
+ * - Easy to test and maintain
+ * - Reusable in other projects
  */
 
 class Navigation {
@@ -18,23 +18,23 @@ class Navigation {
   }
   
   init() {
-    // Мобильное меню
+    // Mobile menu toggle
     if (this.navToggle) {
       this.navToggle.addEventListener('click', () => this.toggleMenu());
     }
     
-    // Закрытие меню при клике на ссылку
+    // Close menu on link click
     this.navLinks.forEach(link => {
       link.addEventListener('click', () => this.closeMenu());
     });
     
-    // Плавная прокрутка
+    // Smooth scrolling
     this.setupSmoothScroll();
     
-    // Активная ссылка при прокрутке
+    // Active link on scroll
     this.setupActiveLink();
     
-    // Изменение навигации при прокрутке
+    // Navigation behavior on scroll
     this.setupScrollBehavior();
   }
   
@@ -53,7 +53,7 @@ class Navigation {
       link.addEventListener('click', (e) => {
         const href = link.getAttribute('href');
         
-        // Проверяем, что это якорная ссылка
+        // Check if it's an anchor link
         if (href.startsWith('#')) {
           e.preventDefault();
           const targetId = href.substring(1);
@@ -122,7 +122,7 @@ class Navigation {
   }
 }
 
-// Инициализация при загрузке DOM
+// Initialize on DOM load
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
     new Navigation();

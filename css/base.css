@@ -53,12 +53,36 @@ p {
 }
 
 a {
-  color: var(--color-primary);
-  transition: color var(--transition-fast);
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: all var(--transition-fast);
+}
+
+/* Override gradient text for buttons */
+a.btn {
+  background: none;
+  -webkit-background-clip: unset;
+  -webkit-text-fill-color: unset;
+  background-clip: unset;
+}
+
+/* Navigation links use their own gradient, don't apply global gradient */
+.nav__logo,
+.nav__link {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 a:hover {
-  color: var(--color-primary-light);
+  filter: brightness(1.2);
+}
+
+a.btn:hover {
+  filter: none;
 }
 
 a:focus-visible {
@@ -92,8 +116,9 @@ section {
   display: block;
   width: 60px;
   height: 4px;
-  background: var(--color-primary);
+  background: var(--gradient-primary);
   margin: var(--spacing-md) auto 0;
   border-radius: var(--border-radius-full);
+  box-shadow: 0 0 10px rgba(198, 113, 237, 0.5);
 }
 

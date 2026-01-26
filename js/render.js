@@ -1,11 +1,11 @@
 /**
  * Render Module
  * 
- * Почему отдельный модуль для рендеринга:
- * - Разделение логики отображения и бизнес-логики
- * - Легко изменить способ отображения данных
- * - Можно добавить шаблонизатор в будущем
- * - Чистый и понятный код
+ * Why separate rendering module:
+ * - Separates display logic from business logic
+ * - Easy to change how data is displayed
+ * - Can add templating in the future
+ * - Clean and understandable code
  */
 
 class Renderer {
@@ -43,12 +43,12 @@ class Renderer {
           <div class="project-card__links">
             ${project.links.demo !== '#' ? `
               <a href="${project.links.demo}" target="_blank" rel="noopener noreferrer" class="project-card__link">
-                Демо →
+                Demo →
               </a>
             ` : ''}
             ${project.links.code !== '#' ? `
               <a href="${project.links.code}" target="_blank" rel="noopener noreferrer" class="project-card__link">
-                Код →
+                Code →
               </a>
             ` : ''}
           </div>
@@ -57,7 +57,7 @@ class Renderer {
     `).join('');
   }
   
-  // Защита от XSS атак
+  // XSS protection
   escapeHtml(text) {
     const div = document.createElement('div');
     div.textContent = text;
@@ -72,7 +72,7 @@ class Renderer {
   }
 }
 
-// Экспорт для использования в других модулях
+// Export for use in other modules
 if (typeof window !== 'undefined') {
   window.Renderer = Renderer;
 }

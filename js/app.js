@@ -1,41 +1,41 @@
 /**
  * Main Application File
  * 
- * Почему это главный файл:
- * - Точка входа приложения
- * - Координирует работу всех модулей
- * - Инициализация при загрузке страницы
- * - Легко понять структуру приложения
+ * Why this is the main file:
+ * - Application entry point
+ * - Coordinates all modules
+ * - Initializes on page load
+ * - Easy to understand application structure
  */
 
-// Инициализация приложения
+// Initialize application
 document.addEventListener('DOMContentLoaded', () => {
-  // Создаем экземпляр рендерера
+  // Create renderer instance
   const renderer = new Renderer();
   
-  // Рендерим навыки
+  // Render skills
   if (typeof skillsData !== 'undefined') {
     renderer.renderSkills(skillsData);
   }
   
-  // Рендерим проекты
+  // Render projects
   if (typeof projectsData !== 'undefined') {
     renderer.renderProjects(projectsData);
   }
   
-  // Обновляем год в футере
+  // Update year in footer
   renderer.updateCurrentYear();
   
-  // Добавляем анимации при скролле (опционально)
+  // Add scroll animations (optional)
   setupScrollAnimations();
 });
 
 /**
- * Анимации при прокрутке
- * Почему это полезно:
- * - Улучшает пользовательский опыт
- * - Делает сайт более интерактивным
- * - Показывает понимание современных веб-технологий
+ * Scroll Animations
+ * Why this is useful:
+ * - Improves user experience
+ * - Makes the site more interactive
+ * - Shows understanding of modern web technologies
  */
 function setupScrollAnimations() {
   const observerOptions = {
@@ -52,7 +52,7 @@ function setupScrollAnimations() {
     });
   }, observerOptions);
   
-  // Наблюдаем за секциями
+  // Observe sections
   const sections = document.querySelectorAll('section');
   sections.forEach(section => {
     section.style.opacity = '0';
@@ -61,7 +61,7 @@ function setupScrollAnimations() {
     observer.observe(section);
   });
   
-  // Первая секция (hero) сразу видима
+  // First section (hero) is immediately visible
   if (sections[0]) {
     sections[0].style.opacity = '1';
     sections[0].style.transform = 'translateY(0)';

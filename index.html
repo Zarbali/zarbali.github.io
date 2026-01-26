@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Portfolio Arif - Frontend Developer. Портфолио разработчика с проектами и навыками.">
-  <title>Arif | Frontend Developer Portfolio</title>
+  <meta name="description" content="Portfolio Arif - AI Student & Developer. University student specializing in Artificial Intelligence with hands-on projects and programming skills.">
+  <title>Arif | AI Student & Developer Portfolio</title>
   
   <!-- Styles -->
   <link rel="stylesheet" href="css/variables.css">
@@ -21,10 +21,10 @@
       <div class="nav__content">
         <a href="#hero" class="nav__logo">Arif</a>
         <ul class="nav__menu" id="navMenu">
-          <li><a href="#about" class="nav__link">О себе</a></li>
-          <li><a href="#skills" class="nav__link">Навыки</a></li>
-          <li><a href="#projects" class="nav__link">Проекты</a></li>
-          <li><a href="#contact" class="nav__link">Контакты</a></li>
+          <li><a href="#about" class="nav__link">About</a></li>
+          <li><a href="#skills" class="nav__link">Skills</a></li>
+          <li><a href="#projects" class="nav__link">Projects</a></li>
+          <li><a href="#contact" class="nav__link">Contact</a></li>
         </ul>
         <button class="nav__toggle" id="navToggle" aria-label="Toggle navigation">
           <span></span>
@@ -40,15 +40,16 @@
     <div class="container">
       <div class="hero__content">
         <h1 class="hero__title">
-          Привет, я <span class="hero__name">Arif</span>
+          Hi, I'm <span class="hero__name">Arif</span>
         </h1>
-        <p class="hero__subtitle">Frontend Developer</p>
+        <p class="hero__subtitle">AI Student & Developer</p>
         <p class="hero__description">
-          Создаю современные веб-приложения с фокусом на пользовательский опыт и чистый код
+          University student specializing in Artificial Intelligence. Building AI projects, 
+          exploring machine learning libraries, and developing practical solutions through programming.
         </p>
         <div class="hero__actions">
-          <a href="#projects" class="btn btn--primary">Мои проекты</a>
-          <a href="#contact" class="btn btn--secondary">Связаться</a>
+          <a href="#projects" class="btn btn--primary">View Projects</a>
+          <a href="#contact" class="btn btn--secondary">Get in Touch</a>
         </div>
       </div>
     </div>
@@ -57,17 +58,29 @@
   <!-- About Section -->
   <section class="about" id="about">
     <div class="container">
-      <h2 class="section__title">О себе</h2>
+      <h2 class="section__title">About Me</h2>
       <div class="about__content">
         <div class="about__text">
           <p>
-            Я frontend разработчик, который любит создавать интуитивные и функциональные интерфейсы.
-            Мой подход к разработке основан на понимании потребностей пользователей и написании
-            поддерживаемого кода.
+            I'm a university student pursuing Artificial Intelligence, passionate about machine learning, 
+            neural networks, and building intelligent systems. Through my coursework, I've completed 
+            multiple AI projects independently, consistently achieving excellent grades.
           </p>
           <p>
-            Постоянно изучаю новые технологии и улучшаю свои навыки. Верю в важность чистого кода,
-            тестирования и работы в команде.
+            I work with various AI libraries and frameworks, write clean and efficient code, and enjoy 
+            solving complex problems through programming. My projects demonstrate practical applications 
+            of AI concepts learned in university, showcasing both theoretical understanding and hands-on 
+            implementation skills.
+          </p>
+          <p>
+            Beyond AI, I also have experience in frontend and backend development. I've worked with 
+            modern web technologies, building user interfaces and server-side applications. This full-stack 
+            experience complements my AI expertise, allowing me to create complete solutions that integrate 
+            machine learning models with web applications.
+          </p>
+          <p>
+            I'm always eager to learn new technologies, improve my skills, and take on challenging 
+            assignments that push the boundaries of what I can create with AI and web development.
           </p>
         </div>
       </div>
@@ -77,7 +90,7 @@
   <!-- Skills Section -->
   <section class="skills" id="skills">
     <div class="container">
-      <h2 class="section__title">Навыки</h2>
+      <h2 class="section__title">Skills</h2>
       <div class="skills__grid" id="skillsGrid">
         <!-- Skills will be populated by JavaScript -->
       </div>
@@ -87,7 +100,7 @@
   <!-- Projects Section -->
   <section class="projects" id="projects">
     <div class="container">
-      <h2 class="section__title">Проекты</h2>
+      <h2 class="section__title">Projects</h2>
       <div class="projects__grid" id="projectsGrid">
         <!-- Projects will be populated by JavaScript -->
       </div>
@@ -97,17 +110,52 @@
   <!-- Contact Section -->
   <section class="contact" id="contact">
     <div class="container">
-      <h2 class="section__title">Контакты</h2>
+      <h2 class="section__title">Contact</h2>
       <div class="contact__content">
         <p class="contact__text">
-          Готов к новым проектам и возможностям для сотрудничества.
+          Open to new projects, collaborations, and opportunities. Feel free to reach out!
         </p>
+        
+        <!-- Contact Form -->
+        <form class="contact__form" id="contactForm">
+          <div class="form__group">
+            <label for="email" class="form__label">Your Email</label>
+            <input 
+              type="email" 
+              id="email" 
+              name="email" 
+              class="form__input" 
+              placeholder="your.email@example.com"
+              required
+            >
+          </div>
+          
+          <div class="form__group">
+            <label for="message" class="form__label">Message</label>
+            <textarea 
+              id="message" 
+              name="message" 
+              class="form__textarea" 
+              rows="6"
+              placeholder="Write your message here..."
+              required
+            ></textarea>
+          </div>
+          
+          <button type="submit" class="btn btn--primary form__submit">
+            <span class="submit__text">Send Message</span>
+            <span class="submit__loading" style="display: none;">Sending...</span>
+          </button>
+          
+          <div class="form__message" id="formMessage"></div>
+        </form>
+        
         <div class="contact__links">
           <a href="https://github.com/yourusername" class="contact__link" target="_blank" rel="noopener noreferrer">
             GitHub
           </a>
-          <a href="mailto:your.email@example.com" class="contact__link">
-            Email
+          <a href="mailto:zarbalievarif10@gmail.com" class="contact__link">
+            Direct Email
           </a>
         </div>
       </div>
@@ -118,15 +166,17 @@
   <footer class="footer">
     <div class="container">
       <p class="footer__text">
-        &copy; <span id="currentYear"></span> Arif. Сделано с вниманием к деталям.
+        &copy; <span id="currentYear"></span> Arif. Built with attention to detail.
       </p>
     </div>
   </footer>
 
   <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script src="js/data.js"></script>
   <script src="js/navigation.js"></script>
   <script src="js/render.js"></script>
+  <script src="js/contact.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
