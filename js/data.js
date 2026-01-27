@@ -15,6 +15,16 @@ const skillsData = [
     icon: '🐍'
   },
   {
+    name: 'Java',
+    level: 'Intermediate',
+    icon: '☕'
+  },
+  {
+    name: 'C#',
+    level: 'Intermediate',
+    icon: '🔷'
+  },
+  {
     name: 'TensorFlow',
     level: 'Intermediate',
     icon: '🧠'
