@@ -73,34 +73,48 @@ const skillsData = [
 
 const projectsData = [
   {
-    title: 'Project Coming Soon',
-    description: 'University AI project completed with excellent grade. Details will be added soon.',
-    tags: ['AI', 'Python', 'Machine Learning'],
+    slug: 'healthylifestylega',
+    title: 'Healthy Lifestyle GA',
+    description: 'AI-based recommendation system using a Genetic Algorithm to generate personalized diet and workout plans based on user profile, goals, and preferences.',
+    tags: ['Python', 'Genetic Algorithm', 'AI', 'pandas'],
     links: {
-      demo: '#',
-      code: '#'
+      page: 'project.html?project=healthylifestylega',
+      code: 'https://github.com/Zarbali/HealthyLifestyleGA'
     },
-    image: '🚀'
+    image: '🥗'
   },
   {
-    title: 'Project Coming Soon',
-    description: 'Independent university assignment demonstrating AI implementation skills.',
-    tags: ['Deep Learning', 'Neural Networks'],
+    slug: 'aichat',
+    title: 'AI Chat',
+    description: 'Conversational chatbot with a knowledge base, learning from users, and DialoGPT for open-ended dialogue. Uses SentenceTransformer for semantic question matching.',
+    tags: ['Python', 'NLP', 'DialoGPT', 'SentenceTransformer'],
     links: {
-      demo: '#',
-      code: '#'
+      page: 'project.html?project=aichat',
+      code: 'https://github.com/Zarbali/AI_Chat'
     },
-    image: '🧠'
+    image: '💬'
   },
   {
-    title: 'Project Coming Soon',
-    description: 'AI project showcasing practical application of machine learning concepts.',
-    tags: ['Data Science', 'AI Libraries'],
+    slug: 'film',
+    title: 'Movie Recommender System',
+    description: 'Web app with collaborative filtering (SVD) for personalized movie recommendations. Flask backend, Surprise library, SQLite for history, dynamic data upload and model retraining.',
+    tags: ['Python', 'Flask', 'Surprise', 'Collaborative Filtering', 'SQLite'],
     links: {
-      demo: '#',
-      code: '#'
+      page: 'project.html?project=film',
+      code: 'https://github.com/Zarbali/film'
     },
-    image: '💡'
+    image: '🎬'
+  },
+  {
+    slug: 'imageclassifier',
+    title: 'Image Classifier',
+    description: 'Binary CNN for Dogs vs Cats using transfer learning (VGG16). TensorFlow/Keras, data augmentation, ~94–95% accuracy. CLI for single and batch predictions.',
+    tags: ['Python', 'TensorFlow', 'Keras', 'CNN', 'Transfer Learning', 'VGG16'],
+    links: {
+      page: 'project.html?project=imageclassifier',
+      code: 'https://github.com/Zarbali/ImageClassifier'
+    },
+    image: '🖼️'
   }
 ];
 

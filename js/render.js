@@ -29,7 +29,10 @@ class Renderer {
   renderProjects(projects) {
     if (!this.projectsGrid || !projects) return;
     
-    this.projectsGrid.innerHTML = projects.map(project => `
+    this.projectsGrid.innerHTML = projects.map(project => {
+      const pageUrl = project.links.page || project.links.demo || '#';
+      const codeUrl = project.links.code || '#';
+      return `
       <div class="project-card">
         <div class="project-card__image">${project.image}</div>
         <div class="project-card__content">
@@ -41,20 +44,21 @@ class Renderer {
             `).join('')}
           </div>
           <div class="project-card__links">
-            ${project.links.demo !== '#' ? `
-              <a href="${project.links.demo}" target="_blank" rel="noopener noreferrer" class="project-card__link">
-                Demo →
+            ${pageUrl !== '#' ? `
+              <a href="${this.escapeHtml(pageUrl)}" class="project-card__link">
+                View Project →
               </a>
             ` : ''}
-            ${project.links.code !== '#' ? `
-              <a href="${project.links.code}" target="_blank" rel="noopener noreferrer" class="project-card__link">
-                Code →
+            ${codeUrl !== '#' ? `
+              <a href="${this.escapeHtml(codeUrl)}" target="_blank" rel="noopener noreferrer" class="project-card__link">
+                GitHub →
               </a>
             ` : ''}
           </div>
         </div>
       </div>
-    `).join('');
+    `;
+    }).join('');
   }
   
   // XSS protection

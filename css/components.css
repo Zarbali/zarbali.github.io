@@ -812,3 +812,262 @@
   font-size: var(--font-size-sm);
 }
 
+/* Project detail page */
+.project-detail {
+  padding: calc(var(--spacing-4xl) + 60px) 0 var(--spacing-4xl);
+}
+
+.project-detail .container {
+  max-width: 800px;
+}
+
+.project-detail__back {
+  margin-bottom: var(--spacing-xl);
+}
+
+.project-detail__back a {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.project-detail__back a:hover {
+  color: var(--color-primary);
+}
+
+.project-detail__title {
+  font-size: var(--font-size-4xl);
+  margin-bottom: var(--spacing-md);
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: var(--font-weight-bold);
+}
+
+.project-detail__lead {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--spacing-lg);
+  max-width: 640px;
+}
+
+.project-detail__tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-2xl);
+}
+
+.project-detail__tag {
+  display: inline-block;
+  padding: var(--spacing-xs) var(--spacing-md);
+  background: var(--color-glass);
+  border: 1px solid var(--color-glass-border);
+  border-radius: var(--border-radius-full);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-medium);
+}
+
+.project-detail__actions {
+  display: flex;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+  margin-bottom: var(--spacing-3xl);
+}
+
+.project-detail__section {
+  margin-bottom: var(--spacing-2xl);
+}
+
+.project-detail__section-title {
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--spacing-md);
+  color: var(--color-text);
+  font-weight: var(--font-weight-semibold);
+}
+
+.project-detail__section-p {
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--spacing-md);
+}
+
+.project-detail__bullets {
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  margin: 0 0 var(--spacing-md);
+  padding-left: var(--spacing-xl);
+}
+
+.project-detail__bullets li {
+  margin-bottom: var(--spacing-sm);
+}
+
+.project-detail__code-block {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-lg);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  white-space: pre-wrap;
+  margin: var(--spacing-md) 0;
+}
+
+/* Project demo block */
+.project-detail__demo {
+  background: var(--color-glass);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--color-glass-border);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-2xl);
+  margin-bottom: var(--spacing-3xl);
+}
+
+.project-detail__demo-title {
+  font-size: var(--font-size-xl);
+  color: var(--color-text);
+  margin-bottom: var(--spacing-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+.project-detail__demo-desc {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--spacing-xl);
+  line-height: var(--line-height-normal);
+}
+
+.project-detail__demo-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+}
+
+.project-detail__demo-row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.project-detail__label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+}
+
+.project-detail__select {
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-md);
+  color: var(--color-text);
+  font-size: var(--font-size-base);
+  min-width: 160px;
+}
+
+.project-detail__select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.project-detail__demo-result {
+  min-height: 48px;
+  padding: var(--spacing-md);
+  background: var(--color-bg-secondary);
+  border-radius: var(--border-radius-md);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.project-detail__demo-result--visible {
+  opacity: 1;
+}
+
+.project-detail__demo-result strong {
+  color: var(--color-text);
+}
+
+.project-detail__demo-loading {
+  color: var(--color-primary);
+  font-style: italic;
+}
+
+/* Chat demo */
+.project-detail__chat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.project-detail__chat-messages {
+  min-height: 200px;
+  max-height: 320px;
+  overflow-y: auto;
+  padding: var(--spacing-md);
+  background: var(--color-bg-secondary);
+  border-radius: var(--border-radius-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.project-detail__chat-msg {
+  max-width: 85%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-relaxed);
+  word-wrap: break-word;
+}
+
+.project-detail__chat-msg--bot {
+  align-self: flex-start;
+  background: var(--color-glass);
+  border: 1px solid var(--color-glass-border);
+  color: var(--color-text);
+}
+
+.project-detail__chat-msg--user {
+  align-self: flex-end;
+  background: var(--color-primary);
+  color: var(--color-bg);
+}
+
+.project-detail__chat-form {
+  display: flex;
+  gap: var(--spacing-sm);
+  align-items: center;
+}
+
+.project-detail__chat-input {
+  flex: 1;
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-md);
+  color: var(--color-text);
+  font-size: var(--font-size-base);
+}
+
+.project-detail__chat-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.project-detail__chat-input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.project-detail__not-found {
+  text-align: center;
+  padding: var(--spacing-4xl);
+}

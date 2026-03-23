@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Project detail - Arif Portfolio">
+  <title>Project | Arif Portfolio</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="nav" id="navigation">
+    <div class="container">
+      <div class="nav__content">
+        <a href="index.html" class="nav__logo">Arif</a>
+        <ul class="nav__menu" id="navMenu">
+          <li><a href="index.html#about" class="nav__link">About</a></li>
+          <li><a href="index.html#skills" class="nav__link">Skills</a></li>
+          <li><a href="index.html#projects" class="nav__link">Projects</a></li>
+          <li><a href="index.html#contact" class="nav__link">Contact</a></li>
+        </ul>
+        <button class="nav__toggle" id="navToggle" aria-label="Toggle navigation" style="display: none;">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="project-detail">
+    <div class="container">
+      <div class="project-detail__back">
+        <a href="index.html#projects">← Back to Projects</a>
+      </div>
+      <div id="projectContent">
+        <!-- Filled by JS -->
+      </div>
+      <div id="projectNotFound" class="project-detail__not-found" style="display: none;">
+        <p>Project not found.</p>
+        <a href="index.html#projects" class="btn btn--primary">Back to Projects</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p class="footer__text">&copy; <span id="currentYear"></span> Arif. Built with attention to detail.</p>
+    </div>
+  </footer>
+
+  <script src="js/projectDetails.js"></script>
+  <script src="js/navigation.js"></script>
+  <script>
+    (function() {
+      function escapeHtml(text) {
+        var div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+      }
+
+      var params = new URLSearchParams(window.location.search);
+      var slug = params.get('project');
+      var contentEl = document.getElementById('projectContent');
+      var notFoundEl = document.getElementById('projectNotFound');
+
+      if (!slug || !window.projectDetails || !projectDetails[slug]) {
+        contentEl.style.display = 'none';
+        notFoundEl.style.display = 'block';
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        return;
+      }
+
+      var project = projectDetails[slug];
+      var html = '';
+
+      html += '<h1 class="project-detail__title">' + escapeHtml(project.title) + '</h1>';
+      if (project.subtitle) {
+        html += '<p class="project-detail__lead">' + escapeHtml(project.subtitle) + '</p>';
+      }
+      if (project.techStack && project.techStack.length) {
+        html += '<div class="project-detail__tech">';
+        project.techStack.forEach(function(t) {
+          html += '<span class="project-detail__tag">' + escapeHtml(t) + '</span>';
+        });
+        html += '</div>';
+      }
+      html += '<div class="project-detail__actions">';
+      html += '<a href="' + escapeHtml(project.githubUrl) + '" target="_blank" rel="noopener noreferrer" class="btn btn--primary">View on GitHub</a>';
+      html += '<a href="index.html#projects" class="btn btn--secondary">Back to Projects</a>';
+      html += '</div>';
+
+      if (project.hasDemo && project.demoConfig) {
+        var dc = project.demoConfig;
+        html += '<div class="project-detail__demo" id="projectDemo">';
+        if (project.demoType === 'chat') {
+          html += '<h3 class="project-detail__demo-title">Try the chatbot</h3>';
+          html += '<p class="project-detail__demo-desc">Ask about the project creator or say your name. This is a simplified demo of the chatbot behaviour.</p>';
+          html += '<div class="project-detail__chat">';
+          html += '<div class="project-detail__chat-messages" id="chatMessages" aria-live="polite"></div>';
+          html += '<form class="project-detail__chat-form" id="demoForm">';
+          html += '<input type="text" class="project-detail__chat-input" id="chatInput" placeholder="Type your message..." autocomplete="off" required>';
+          html += '<button type="submit" class="btn btn--primary" id="demoSubmit">Send</button>';
+          html += '</form>';
+          html += '</div>';
+        } else if (project.demoType === 'movies') {
+          html += '<h3 class="project-detail__demo-title">Try the recommendation engine</h3>';
+          html += '<p class="project-detail__demo-desc">Select a User ID to see sample movie recommendations (simulated output). The real app uses SVD collaborative filtering on MovieLens data.</p>';
+          html += '<form class="project-detail__demo-form" id="demoForm">';
+          html += '<div class="project-detail__demo-row">';
+          html += '<label class="project-detail__label">User ID</label>';
+          html += '<select class="project-detail__select" name="userId" id="demoUserId">';
+          dc.userIds.forEach(function(u) {
+            html += '<option value="' + escapeHtml(u.value) + '">' + escapeHtml(u.label) + '</option>';
+          });
+          html += '</select>';
+          html += '</div>';
+          html += '<button type="submit" class="btn btn--primary" id="demoSubmit">Get recommendations</button>';
+          html += '</form>';
+          html += '<div class="project-detail__demo-result" id="demoResult" aria-live="polite"></div>';
+        } else if (project.demoType === 'classifier') {
+          html += '<h3 class="project-detail__demo-title">Try the classifier (simulated)</h3>';
+          html += '<p class="project-detail__demo-desc">Select a sample to see how the classifier output would look. The real app runs locally with python predict.py.</p>';
+          html += '<form class="project-detail__demo-form" id="demoForm">';
+          html += '<div class="project-detail__demo-row">';
+          html += '<label class="project-detail__label">Sample image</label>';
+          html += '<select class="project-detail__select" name="sample" id="demoSample">';
+          dc.samples.forEach(function(s) {
+            html += '<option value="' + escapeHtml(s.value) + '">' + escapeHtml(s.label) + '</option>';
+          });
+          html += '</select>';
+          html += '</div>';
+          html += '<button type="submit" class="btn btn--primary" id="demoSubmit">Classify</button>';
+          html += '</form>';
+          html += '<div class="project-detail__demo-result" id="demoResult" aria-live="polite"></div>';
+        } else {
+          html += '<h3 class="project-detail__demo-title">Try the recommendation engine</h3>';
+          html += '<p class="project-detail__demo-desc">Select your goal and dietary preference, then get a personalized plan (simulated output).</p>';
+          html += '<form class="project-detail__demo-form" id="demoForm">';
+          html += '<div class="project-detail__demo-row">';
+          html += '<label class="project-detail__label">Goal</label>';
+          html += '<select class="project-detail__select" name="goal" id="demoGoal">';
+          dc.goals.forEach(function(g) {
+            html += '<option value="' + escapeHtml(g.value) + '">' + escapeHtml(g.label) + '</option>';
+          });
+          html += '</select>';
+          html += '</div>';
+          html += '<div class="project-detail__demo-row">';
+          html += '<label class="project-detail__label">Preference</label>';
+          html += '<select class="project-detail__select" name="preference" id="demoPreference">';
+          dc.preferences.forEach(function(p) {
+            html += '<option value="' + escapeHtml(p.value) + '">' + escapeHtml(p.label) + '</option>';
+          });
+          html += '</select>';
+          html += '</div>';
+          html += '<button type="submit" class="btn btn--primary" id="demoSubmit">Get recommendation</button>';
+          html += '</form>';
+          html += '<div class="project-detail__demo-result" id="demoResult" aria-live="polite"></div>';
+        }
+        html += '</div>';
+      }
+
+      if (project.sections && project.sections.length) {
+        project.sections.forEach(function(s) {
+          html += '<div class="project-detail__section">';
+          html += '<h3 class="project-detail__section-title">' + escapeHtml(s.title) + '</h3>';
+          html += '<p class="project-detail__section-p">' + escapeHtml(s.content) + '</p>';
+          if (s.bullets && s.bullets.length) {
+            html += '<ul class="project-detail__bullets">';
+            s.bullets.forEach(function(b) {
+              html += '<li>' + escapeHtml(b) + '</li>';
+            });
+            html += '</ul>';
+          }
+          html += '</div>';
+        });
+      }
+
+      if (project.howToRun) {
+        html += '<div class="project-detail__section">';
+        html += '<h3 class="project-detail__section-title">How to run</h3>';
+        html += '<div class="project-detail__code-block">' + escapeHtml(project.howToRun) + '</div>';
+        html += '</div>';
+      }
+
+      if (project.exampleOutput) {
+        html += '<div class="project-detail__section">';
+        html += '<h3 class="project-detail__section-title">Example output</h3>';
+        html += '<div class="project-detail__code-block">' + escapeHtml(project.exampleOutput) + '</div>';
+        html += '</div>';
+      }
+
+      if (project.demoInstructions) {
+        var di = project.demoInstructions;
+        html += '<div class="project-detail__section project-detail__instructions">';
+        html += '<h3 class="project-detail__section-title">' + escapeHtml(di.title) + '</h3>';
+        if (di.intro) html += '<p class="project-detail__section-p">' + escapeHtml(di.intro) + '</p>';
+        if (di.bullets && di.bullets.length) {
+          html += '<ul class="project-detail__bullets">';
+          di.bullets.forEach(function(b) {
+            html += '<li>' + escapeHtml(b) + '</li>';
+          });
+          html += '</ul>';
+        }
+        html += '</div>';
+      }
+
+      contentEl.innerHTML = html;
+      contentEl.style.display = 'block';
+      document.getElementById('currentYear').textContent = new Date().getFullYear();
+      document.title = project.title + ' | Arif Portfolio';
+
+      if (project.hasDemo && project.demoConfig) {
+        var dc = project.demoConfig;
+        if (project.demoType === 'chat') {
+          var chatMessages = document.getElementById('chatMessages');
+          var chatForm = document.getElementById('demoForm');
+          var chatInput = document.getElementById('chatInput');
+          var userName = null;
+          var learned = {};
+          var pendingQuestion = null;
+          function normalize(s) {
+            return (s || '').toLowerCase().trim().replace(/\s+/g, ' ').replace(/[.?]/g, '');
+          }
+          function wordOverlap(keyStr, normStr) {
+            var kw = keyStr.split(' ').filter(Boolean);
+            var nw = normStr.split(' ');
+            var count = 0;
+            for (var i = 0; i < kw.length; i++) if (nw.indexOf(kw[i]) !== -1) count++;
+            return kw.length ? count / kw.length : 0;
+          }
+          function findLearnedAnswer(norm) {
+            for (var key in learned) {
+              if (norm.indexOf(key) !== -1 || key.indexOf(norm) !== -1) return learned[key];
+            }
+            var best = 0, bestVal = null;
+            for (var key in learned) {
+              var overlap = wordOverlap(key, norm);
+              if (overlap >= 0.6 && overlap > best) { best = overlap; bestVal = learned[key]; }
+            }
+            return bestVal;
+          }
+          function buildReplyFromFacts(lower, factBase) {
+            if (!factBase) return null;
+            var c = factBase.creator, f = factBase.creatorFrom, s = factBase.creatorStudies, l = factBase.creatorLikes, p = factBase.projectName, d = factBase.projectDescription;
+            if (lower.indexOf('who') !== -1 && (lower.indexOf('creator') !== -1 || lower.indexOf('made') !== -1 || lower.indexOf('created') !== -1 || lower.indexOf('author') !== -1 || lower.indexOf('arif') !== -1))
+              return 'The creator is ' + c + '.';
+            if (lower.indexOf('where') !== -1 && (lower.indexOf('from') !== -1 || lower.indexOf('country') !== -1 || lower.indexOf('live') !== -1))
+              return c + ' is from ' + f + '.';
+            if (lower.indexOf('where') !== -1 && (lower.indexOf('study') !== -1 || lower.indexOf('university') !== -1))
+              return c + ' studies at ' + s + '.';
+            if (lower.indexOf('what') !== -1 && (lower.indexOf('like') !== -1 || lower.indexOf('love') !== -1 || lower.indexOf('hobby') !== -1 || lower.indexOf('enjoy') !== -1))
+              return c + ' loves to ' + l + '.';
+            if (lower.indexOf('what') !== -1 && (lower.indexOf('study') !== -1 || lower.indexOf('studies') !== -1))
+              return c + ' studies at ' + s + '.';
+            if ((lower.indexOf('what') !== -1 || lower.indexOf('about') !== -1 || lower.indexOf('how') !== -1) && (lower.indexOf('project') !== -1 || lower.indexOf('this') !== -1 || lower.indexOf('chat') !== -1 || lower.indexOf('work') !== -1))
+              return 'This is the ' + p + ' project — ' + d + ', created by ' + c + '.';
+            if (lower.indexOf('arif') !== -1 || (lower.indexOf('creator') !== -1 && lower.indexOf('about') !== -1))
+              return c + ' is from ' + f + ' and studies at ' + s + '. He loves to ' + l + '.';
+            return null;
+          }
+          function appendMsg(text, isBot) {
+            var div = document.createElement('div');
+            div.className = 'project-detail__chat-msg project-detail__chat-msg--' + (isBot ? 'bot' : 'user');
+            div.textContent = text;
+            chatMessages.appendChild(div);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+          }
+          if (dc.greeting && chatMessages) {
+            appendMsg(dc.greeting, true);
+          }
+          if (chatForm && chatInput && dc.answers) {
+            chatForm.addEventListener('submit', function(e) {
+              e.preventDefault();
+              var text = (chatInput.value || '').trim();
+              if (!text) return;
+              appendMsg(text, false);
+              chatInput.value = '';
+              var lower = text.toLowerCase();
+              var norm = normalize(text);
+              var reply = null;
+              var isTeaching = false;
+
+              if (pendingQuestion !== null) {
+                learned[pendingQuestion] = text;
+                reply = 'Thanks! I\'ll remember that. Ask me again anytime.';
+                pendingQuestion = null;
+                isTeaching = true;
+              } else if (lower.indexOf('remember:') === 0) {
+                var match = text.replace(/^remember:\s*/i, '').split(/\s+is\s+|\s*=\s*/);
+                if (match.length >= 2) {
+                  var key = normalize(match[0]);
+                  var val = match.slice(1).join(' ').trim();
+                  learned[key] = val;
+                  reply = 'Got it! I\'ll remember that. You can ask me about "' + escapeHtml(match[0].trim()) + '" later.';
+                  isTeaching = true;
+                }
+              } else if (/^\s*q\s*:\s*.+\s+a\s*:\s*.+$/i.test(text)) {
+                var rest = text.replace(/^\s*q\s*:\s*/i, '').trim();
+                var qa = rest.split(/\s+a\s*:\s*/i);
+                if (qa.length >= 2) {
+                  var q = normalize(qa[0]);
+                  var a = qa.slice(1).join(' ').trim();
+                  learned[q] = a;
+                  reply = 'I\'ll remember that. Ask me "' + escapeHtml(qa[0].trim()) + '" and I\'ll answer.';
+                  isTeaching = true;
+                }
+              }
+
+              if (!isTeaching) {
+                if (lower.match(/my name is (.+)/) || lower.match(/i'm (.+)/) || lower.match(/i am (.+)/)) {
+                  var nameMatch = text.match(/my name is (.+)/i) || text.match(/i'm (.+)/i) || text.match(/i am (.+)/i);
+                  var name = nameMatch ? nameMatch[1].trim().replace(/\.$/, '') : 'there';
+                  userName = name;
+                  reply = 'Nice to meet you, ' + escapeHtml(name) + '! I\'ll remember that.';
+                } else if ((lower.indexOf('what do you know') !== -1 || lower.indexOf('what did i teach') !== -1 || lower.indexOf('what have you learned') !== -1 || (lower.indexOf('list') !== -1 && lower.indexOf('know') !== -1))) {
+                  var keys = Object.keys(learned);
+                  if (keys.length === 0) reply = 'I know about the creator (Arif Zarbaliyev), where they study (Vizja), what Arif likes, and the project. You haven\'t taught me anything new yet — ask me a question and I\'ll ask you to teach me if I don\'t know!';
+                  else {
+                    reply = 'Here\'s what you taught me: ' + keys.map(function(k) { return '"' + k + '" → ' + learned[k]; }).join('; ') + '. I also know about the creator, the project, and more — just ask!';
+                  }
+                } else if (lower.indexOf('what is my name') !== -1 || lower.indexOf('what\'s my name') !== -1 || lower.indexOf('do you know my name') !== -1) {
+                  reply = userName ? 'Your name is ' + escapeHtml(userName) + '.' : 'I don\'t know your name yet.';
+                } else {
+                  reply = findLearnedAnswer(norm);
+                  if (reply === undefined || reply === null) {
+                    for (var i = 0; i < dc.answers.length; i++) {
+                      var a = dc.answers[i];
+                      var found = false;
+                      for (var k = 0; k < a.keywords.length; k++) {
+                        if (lower.indexOf(a.keywords[k]) !== -1) { found = true; break; }
+                      }
+                      if (found) {
+                        reply = a.response;
+                        if (reply === null && (lower.indexOf('hello') !== -1 || lower.indexOf('hi') !== -1 || lower.indexOf('hey') !== -1)) {
+                          reply = userName ? 'Hi ' + escapeHtml(userName) + '! How can I help you today?' : 'Hi! How can I help you today? Ask me about the project or teach me something.';
+                        }
+                        if (reply === null && (lower.indexOf('good morning') !== -1 || lower.indexOf('good evening') !== -1 || lower === 'yo' || lower === 'sup' || lower.indexOf('what\'s up') !== -1)) {
+                          reply = userName ? 'Hi ' + escapeHtml(userName) + '! How can I help?' : 'Hi! How can I help you?';
+                        }
+                        if (reply === null && (/^(ok|okay|yes|yeah|yep|no|cool|nice|alright|got it)$/.test(lower))) {
+                          reply = dc.conversationalReplies && dc.conversationalReplies.length ? dc.conversationalReplies[Math.floor(Math.random() * dc.conversationalReplies.length)] : 'Got it! What would you like to ask or tell me?';
+                        }
+                        break;
+                      }
+                    }
+                  }
+                  if ((reply === undefined || reply === null) && dc.factBase) {
+                    reply = buildReplyFromFacts(lower, dc.factBase);
+                  }
+                  if (reply === undefined || reply === null) {
+                    var factualKeywords = ['who ', 'what ', 'where ', 'when ', 'why ', 'how many ', 'how much ', 'which '];
+                    var smallTalkList = ['hi', 'hello', 'hey', 'how are you', 'what\'s up', 'sup', 'good morning', 'good evening', 'good night', 'yo'];
+                    var isFactual = text.length > 2 && (text.indexOf('?') !== -1 || factualKeywords.some(function(k) { return lower.indexOf(k) === 0 || lower.indexOf(k) !== -1; }));
+                    var isSmall = smallTalkList.indexOf(lower) !== -1 || /^how are you/.test(lower);
+                    if (isFactual && !isSmall) {
+                      pendingQuestion = norm;
+                      reply = 'I don\'t know that. Can you teach me?';
+                    } else if (dc.conversationalReplies && dc.conversationalReplies.length) {
+                      reply = dc.conversationalReplies[Math.floor(Math.random() * dc.conversationalReplies.length)];
+                    } else {
+                      reply = 'I\'m not sure what you mean. You can ask me about the project, teach me something, or say your name!';
+                    }
+                  }
+                }
+              }
+              setTimeout(function() { appendMsg(reply, true); }, 400);
+            });
+          }
+        } else if (project.demoType === 'movies') {
+          var form = document.getElementById('demoForm');
+          var resultEl = document.getElementById('demoResult');
+          var movieResults = project.demoConfig.movieResults;
+          if (form && resultEl && movieResults) {
+            form.addEventListener('submit', function(e) {
+              e.preventDefault();
+              var userId = document.getElementById('demoUserId').value;
+              resultEl.innerHTML = '<span class="project-detail__demo-loading">Loading...</span>';
+              resultEl.classList.add('project-detail__demo-result--visible');
+              setTimeout(function() {
+                var movies = movieResults[userId];
+                if (movies && movies.length) {
+                  resultEl.innerHTML = '<strong>Recommended movies for User ' + escapeHtml(userId) + ':</strong><ol style="margin:0.5rem 0 0 1rem;">' + movies.map(function(m) { return '<li>' + escapeHtml(m) + '</li>'; }).join('') + '</ol>';
+                } else {
+                  resultEl.innerHTML = 'No recommendations for this User ID.';
+                }
+              }, 500);
+            });
+          }
+        } else if (project.demoType === 'classifier') {
+          var form = document.getElementById('demoForm');
+          var resultEl = document.getElementById('demoResult');
+          var samples = project.demoConfig.samples;
+          if (form && resultEl && samples) {
+            form.addEventListener('submit', function(e) {
+              e.preventDefault();
+              var sampleVal = document.getElementById('demoSample').value;
+              resultEl.innerHTML = '<span class="project-detail__demo-loading">Classifying...</span>';
+              resultEl.classList.add('project-detail__demo-result--visible');
+              setTimeout(function() {
+                var s = samples.find(function(x) { return x.value === sampleVal; });
+                if (s && s.result) {
+                  var r = s.result;
+                  resultEl.innerHTML = '<strong>PREDICTION RESULT</strong><br>Predicted Class: ' + escapeHtml(r.class) + '<br>Confidence: ' + escapeHtml(r.confidence) + '%<br><span style="color:var(--color-primary)">✓ Simulated output — run locally for real predictions</span>';
+                } else {
+                  resultEl.innerHTML = 'No result for this sample.';
+                }
+              }, 500);
+            });
+          }
+        } else {
+          var form = document.getElementById('demoForm');
+          var resultEl = document.getElementById('demoResult');
+          var results = project.demoConfig.results;
+          if (form && resultEl && results) {
+            form.addEventListener('submit', function(e) {
+              e.preventDefault();
+              var goal = document.getElementById('demoGoal').value;
+              var pref = document.getElementById('demoPreference').value;
+              var key = goal + '_' + pref;
+              resultEl.innerHTML = '<span class="project-detail__demo-loading">Calculating...</span>';
+              resultEl.classList.add('project-detail__demo-result--visible');
+              setTimeout(function() {
+                var r = results[key];
+                if (r) {
+                  resultEl.innerHTML = '<strong>Recommended diet:</strong> ' + escapeHtml(r.diet) + '<br><strong>Recommended workout:</strong> ' + escapeHtml(r.workout) + '<br><strong>Net calories:</strong> ' + escapeHtml(r.net) + ' kcal';
+                } else {
+                  resultEl.innerHTML = 'No recommendation for this combination.';
+                }
+              }, 600);
+            });
+          }
+        }
+      }
+    })();
+  </script>
+</body>
+</html>
