@@ -221,6 +221,13 @@
   opacity: 0.7;
 }
 
+button.nav__link {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-family: inherit;
+}
+
 .nav__link:hover {
   opacity: 1;
   filter: brightness(1.2);

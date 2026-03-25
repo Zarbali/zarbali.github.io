@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Portfolio Arif - AI Student & Developer. University student specializing in Artificial Intelligence with hands-on projects and programming skills.">
-  <title>Arif | AI Student & Developer Portfolio</title>
+  <title data-i18n-title="site.title">Arif | AI Student & Developer Portfolio</title>
   
   <!-- Styles -->
   <link rel="stylesheet" href="css/variables.css">
@@ -21,10 +21,11 @@
       <div class="nav__content">
         <a href="#hero" class="nav__logo">Arif</a>
         <ul class="nav__menu" id="navMenu">
-          <li><a href="#about" class="nav__link">About</a></li>
-          <li><a href="#skills" class="nav__link">Skills</a></li>
-          <li><a href="#projects" class="nav__link">Projects</a></li>
-          <li><a href="#contact" class="nav__link">Contact</a></li>
+          <li><a href="#about" class="nav__link" data-i18n="nav.about">About</a></li>
+          <li><a href="#skills" class="nav__link" data-i18n="nav.skills">Skills</a></li>
+          <li><a href="#projects" class="nav__link" data-i18n="nav.projects">Projects</a></li>
+          <li><a href="#contact" class="nav__link" data-i18n="nav.contact">Contact</a></li>
+          <li><button class="nav__link" data-lang-switch>PL</button></li>
         </ul>
         <button class="nav__toggle" id="navToggle" aria-label="Toggle navigation">
           <span></span>
@@ -42,14 +43,14 @@
         <h1 class="hero__title">
           Hi, I'm <span class="hero__name">Arif</span>
         </h1>
-        <p class="hero__subtitle">AI Student & Developer</p>
+        <p class="hero__subtitle" data-i18n="hero.subtitle">AI Student & Developer</p>
         <p class="hero__description">
-          University student specializing in Artificial Intelligence. Building AI projects, 
-          exploring machine learning libraries, and developing practical solutions through programming.
+          <span data-i18n="hero.description">University student specializing in Artificial Intelligence. Building AI projects, 
+          exploring machine learning libraries, and developing practical solutions through programming.</span>
         </p>
         <div class="hero__actions">
-          <a href="#projects" class="btn btn--primary">View Projects</a>
-          <a href="#contact" class="btn btn--secondary">Get in Touch</a>
+          <a href="#projects" class="btn btn--primary" data-i18n="hero.viewProjects">View Projects</a>
+          <a href="#contact" class="btn btn--secondary" data-i18n="hero.getInTouch">Get in Touch</a>
         </div>
       </div>
     </div>
@@ -58,29 +59,29 @@
   <!-- About Section -->
   <section class="about" id="about">
     <div class="container">
-      <h2 class="section__title">About Me</h2>
+      <h2 class="section__title" data-i18n="section.about">About Me</h2>
       <div class="about__content">
         <div class="about__text">
           <p>
-            I'm a university student pursuing Artificial Intelligence, passionate about machine learning, 
+            <span data-i18n="about.p1">I'm a university student pursuing Artificial Intelligence, passionate about machine learning, 
             neural networks, and building intelligent systems. Through my coursework, I've completed 
-            multiple AI projects independently, consistently achieving excellent grades.
+            multiple AI projects independently, consistently achieving excellent grades.</span>
           </p>
           <p>
-            I work with various AI libraries and frameworks, write clean and efficient code, and enjoy 
+            <span data-i18n="about.p2">I work with various AI libraries and frameworks, write clean and efficient code, and enjoy 
             solving complex problems through programming. My projects demonstrate practical applications 
             of AI concepts learned in university, showcasing both theoretical understanding and hands-on 
-            implementation skills.
+            implementation skills.</span>
           </p>
           <p>
-            Beyond AI, I also have experience in frontend and backend development. I've worked with 
+            <span data-i18n="about.p3">Beyond AI, I also have experience in frontend and backend development. I've worked with 
             modern web technologies, building user interfaces and server-side applications. This full-stack 
             experience complements my AI expertise, allowing me to create complete solutions that integrate 
-            machine learning models with web applications.
+            machine learning models with web applications.</span>
           </p>
           <p>
-            I'm always eager to learn new technologies, improve my skills, and take on challenging 
-            assignments that push the boundaries of what I can create with AI and web development.
+            <span data-i18n="about.p4">I'm always eager to learn new technologies, improve my skills, and take on challenging 
+            assignments that push the boundaries of what I can create with AI and web development.</span>
           </p>
         </div>
       </div>
@@ -90,7 +91,7 @@
   <!-- Skills Section -->
   <section class="skills" id="skills">
     <div class="container">
-      <h2 class="section__title">Skills</h2>
+      <h2 class="section__title" data-i18n="section.skills">Skills</h2>
       <div class="skills__grid" id="skillsGrid">
         <!-- Skills will be populated by JavaScript -->
       </div>
@@ -100,7 +101,7 @@
   <!-- Projects Section -->
   <section class="projects" id="projects">
     <div class="container">
-      <h2 class="section__title">Projects</h2>
+      <h2 class="section__title" data-i18n="section.projects">Projects</h2>
       <div class="projects__grid" id="projectsGrid">
         <!-- Projects will be populated by JavaScript -->
       </div>
@@ -110,41 +111,43 @@
   <!-- Contact Section -->
   <section class="contact" id="contact">
     <div class="container">
-      <h2 class="section__title">Contact</h2>
+      <h2 class="section__title" data-i18n="section.contact">Contact</h2>
       <div class="contact__content">
-        <p class="contact__text">
+        <p class="contact__text" data-i18n="contact.text">
           Open to new projects, collaborations, and opportunities. Feel free to reach out!
         </p>
         
         <!-- Contact Form -->
         <form class="contact__form" id="contactForm">
           <div class="form__group">
-            <label for="email" class="form__label">Your Email</label>
+            <label for="email" class="form__label" data-i18n="contact.emailLabel">Your Email</label>
             <input 
               type="email" 
               id="email" 
               name="email" 
               class="form__input" 
               placeholder="your.email@example.com"
+              data-i18n-placeholder="contact.emailPlaceholder"
               required
             >
           </div>
           
           <div class="form__group">
-            <label for="message" class="form__label">Message</label>
+            <label for="message" class="form__label" data-i18n="contact.messageLabel">Message</label>
             <textarea 
               id="message" 
               name="message" 
               class="form__textarea" 
               rows="6"
               placeholder="Write your message here..."
+              data-i18n-placeholder="contact.messagePlaceholder"
               required
             ></textarea>
           </div>
           
           <button type="submit" class="btn btn--primary form__submit">
-            <span class="submit__text">Send Message</span>
-            <span class="submit__loading" style="display: none;">Sending...</span>
+            <span class="submit__text" data-i18n="contact.send">Send Message</span>
+            <span class="submit__loading" style="display: none;" data-i18n="contact.sending">Sending...</span>
           </button>
           
           <div class="form__message" id="formMessage"></div>
@@ -155,7 +158,7 @@
             GitHub
           </a>
           <a href="mailto:zarbalievarif10@gmail.com" class="contact__link">
-            Direct Email
+            <span data-i18n="contact.directEmail">Direct Email</span>
           </a>
         </div>
       </div>
@@ -166,13 +169,14 @@
   <footer class="footer">
     <div class="container">
       <p class="footer__text">
-        &copy; <span id="currentYear"></span> Arif. Built with attention to detail.
+        &copy; <span id="currentYear"></span> Arif. <span data-i18n="footer.text">Built with attention to detail.</span>
       </p>
     </div>
   </footer>
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script src="js/i18n.js"></script>
   <script src="js/data.js"></script>
   <script src="js/navigation.js"></script>
   <script src="js/render.js"></script>

@@ -27,6 +27,7 @@ const USE_EMAILJS = true; // EmailJS настроен и включен
 
 // Initialize form when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
+  const tr = (key, fallback) => (window.I18N && window.I18N.t) ? window.I18N.t(key) : fallback;
   const form = document.getElementById('contactForm');
   const formMessage = document.getElementById('formMessage');
   const submitBtn = form?.querySelector('.form__submit');
@@ -44,12 +45,12 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Validate
     if (!email || !message) {
-      showMessage('Please fill in all fields.', 'error');
+      showMessage(tr('contact.error.fillAll', 'Please fill in all fields.'), 'error');
       return;
     }
     
     if (!isValidEmail(email)) {
-      showMessage('Please enter a valid email address.', 'error');
+      showMessage(tr('contact.error.invalidEmail', 'Please enter a valid email address.'), 'error');
       return;
     }
     
@@ -80,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
           templateParams
         );
         
-        showMessage('Message sent successfully! I\'ll get back to you soon.', 'success');
+        showMessage(tr('contact.success.sent', 'Message sent successfully! I\'ll get back to you soon.'), 'success');
         form.reset();
         
       } else {
@@ -103,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const data = await response.json();
         
         if (response.ok && data.success) {
-          showMessage('Message sent successfully! I\'ll get back to you soon.', 'success');
+          showMessage(tr('contact.success.sent', 'Message sent successfully! I\'ll get back to you soon.'), 'success');
           form.reset();
         } else {
           throw new Error(data.message || 'Failed to send message');
@@ -112,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
       
     } catch (error) {
       console.error('Form Error:', error);
-      showMessage('Failed to send message. Please try again later.', 'error');
+      showMessage(tr('contact.error.failed', 'Failed to send message. Please try again later.'), 'error');
     } finally {
       setLoadingState(false);
     }

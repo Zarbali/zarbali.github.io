@@ -12,6 +12,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   // Create renderer instance
   const renderer = new Renderer();
+  window.appRenderer = renderer;
   
   // Render skills
   if (typeof skillsData !== 'undefined') {
@@ -28,6 +29,11 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Add scroll animations (optional)
   setupScrollAnimations();
+
+  document.addEventListener('languageChanged', () => {
+    if (typeof skillsData !== 'undefined') renderer.renderSkills(skillsData);
+    if (typeof projectsData !== 'undefined') renderer.renderProjects(projectsData);
+  });
 });
 
 /**

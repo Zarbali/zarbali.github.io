@@ -18,10 +18,11 @@
       <div class="nav__content">
         <a href="index.html" class="nav__logo">Arif</a>
         <ul class="nav__menu" id="navMenu">
-          <li><a href="index.html#about" class="nav__link">About</a></li>
-          <li><a href="index.html#skills" class="nav__link">Skills</a></li>
-          <li><a href="index.html#projects" class="nav__link">Projects</a></li>
-          <li><a href="index.html#contact" class="nav__link">Contact</a></li>
+          <li><a href="index.html#about" class="nav__link" data-i18n="nav.about">About</a></li>
+          <li><a href="index.html#skills" class="nav__link" data-i18n="nav.skills">Skills</a></li>
+          <li><a href="index.html#projects" class="nav__link" data-i18n="nav.projects">Projects</a></li>
+          <li><a href="index.html#contact" class="nav__link" data-i18n="nav.contact">Contact</a></li>
+          <li><button class="nav__link" data-lang-switch>PL</button></li>
         </ul>
         <button class="nav__toggle" id="navToggle" aria-label="Toggle navigation" style="display: none;">
           <span></span>
@@ -35,24 +36,25 @@
   <main class="project-detail">
     <div class="container">
       <div class="project-detail__back">
-        <a href="index.html#projects">← Back to Projects</a>
+        <a href="index.html#projects" data-i18n="project.back">← Back to Projects</a>
       </div>
       <div id="projectContent">
         <!-- Filled by JS -->
       </div>
       <div id="projectNotFound" class="project-detail__not-found" style="display: none;">
-        <p>Project not found.</p>
-        <a href="index.html#projects" class="btn btn--primary">Back to Projects</a>
+        <p data-i18n="project.notFound">Project not found.</p>
+        <a href="index.html#projects" class="btn btn--primary" data-i18n="project.back">Back to Projects</a>
       </div>
     </div>
   </main>
 
   <footer class="footer">
     <div class="container">
-      <p class="footer__text">&copy; <span id="currentYear"></span> Arif. Built with attention to detail.</p>
+      <p class="footer__text">&copy; <span id="currentYear"></span> Arif. <span data-i18n="footer.text">Built with attention to detail.</span></p>
     </div>
   </footer>
 
+  <script src="js/i18n.js"></script>
   <script src="js/projectDetails.js"></script>
   <script src="js/navigation.js"></script>
   <script>
@@ -61,6 +63,10 @@
         var div = document.createElement('div');
         div.textContent = text;
         return div.innerHTML;
+      }
+      function tr(key, fallback) {
+        if (window.I18N && typeof window.I18N.t === 'function') return window.I18N.t(key);
+        return fallback;
       }
 
       var params = new URLSearchParams(window.location.search);
@@ -75,7 +81,9 @@
         return;
       }
 
-      var project = projectDetails[slug];
+      var project = (window.I18N && window.I18N.localizeProject)
+        ? window.I18N.localizeProject(projectDetails[slug], slug)
+        : projectDetails[slug];
       var html = '';
 
       html += '<h1 class="project-detail__title">' + escapeHtml(project.title) + '</h1>';
@@ -90,51 +98,51 @@
         html += '</div>';
       }
       html += '<div class="project-detail__actions">';
-      html += '<a href="' + escapeHtml(project.githubUrl) + '" target="_blank" rel="noopener noreferrer" class="btn btn--primary">View on GitHub</a>';
-      html += '<a href="index.html#projects" class="btn btn--secondary">Back to Projects</a>';
+      html += '<a href="' + escapeHtml(project.githubUrl) + '" target="_blank" rel="noopener noreferrer" class="btn btn--primary">' + escapeHtml(tr('project.viewGithub', 'View on GitHub')) + '</a>';
+      html += '<a href="index.html#projects" class="btn btn--secondary">' + escapeHtml(tr('project.back', 'Back to Projects')) + '</a>';
       html += '</div>';
 
       if (project.hasDemo && project.demoConfig) {
         var dc = project.demoConfig;
         html += '<div class="project-detail__demo" id="projectDemo">';
         if (project.demoType === 'chat') {
-          html += '<h3 class="project-detail__demo-title">Try the chatbot</h3>';
-          html += '<p class="project-detail__demo-desc">Ask about the project creator or say your name. This is a simplified demo of the chatbot behaviour.</p>';
+          html += '<h3 class="project-detail__demo-title">' + escapeHtml(tr('demo.chat.title', 'Try the chatbot')) + '</h3>';
+          html += '<p class="project-detail__demo-desc">' + escapeHtml(tr('demo.chat.desc', 'Ask about the project creator or say your name. This is a simplified demo of the chatbot behaviour.')) + '</p>';
           html += '<div class="project-detail__chat">';
           html += '<div class="project-detail__chat-messages" id="chatMessages" aria-live="polite"></div>';
           html += '<form class="project-detail__chat-form" id="demoForm">';
-          html += '<input type="text" class="project-detail__chat-input" id="chatInput" placeholder="Type your message..." autocomplete="off" required>';
-          html += '<button type="submit" class="btn btn--primary" id="demoSubmit">Send</button>';
+          html += '<input type="text" class="project-detail__chat-input" id="chatInput" placeholder="' + escapeHtml(tr('demo.chat.placeholder', 'Type your message...')) + '" autocomplete="off" required>';
+          html += '<button type="submit" class="btn btn--primary" id="demoSubmit">' + escapeHtml(tr('demo.chat.send', 'Send')) + '</button>';
           html += '</form>';
           html += '</div>';
         } else if (project.demoType === 'movies') {
-          html += '<h3 class="project-detail__demo-title">Try the recommendation engine</h3>';
-          html += '<p class="project-detail__demo-desc">Select a User ID to see sample movie recommendations (simulated output). The real app uses SVD collaborative filtering on MovieLens data.</p>';
+          html += '<h3 class="project-detail__demo-title">' + escapeHtml(tr('demo.movies.title', 'Try the recommendation engine')) + '</h3>';
+          html += '<p class="project-detail__demo-desc">' + escapeHtml(tr('demo.movies.desc', 'Select a User ID to see sample movie recommendations (simulated output). The real app uses SVD collaborative filtering on MovieLens data.')) + '</p>';
           html += '<form class="project-detail__demo-form" id="demoForm">';
           html += '<div class="project-detail__demo-row">';
-          html += '<label class="project-detail__label">User ID</label>';
+          html += '<label class="project-detail__label">' + escapeHtml(tr('demo.movies.userId', 'User ID')) + '</label>';
           html += '<select class="project-detail__select" name="userId" id="demoUserId">';
           dc.userIds.forEach(function(u) {
             html += '<option value="' + escapeHtml(u.value) + '">' + escapeHtml(u.label) + '</option>';
           });
           html += '</select>';
           html += '</div>';
-          html += '<button type="submit" class="btn btn--primary" id="demoSubmit">Get recommendations</button>';
+          html += '<button type="submit" class="btn btn--primary" id="demoSubmit">' + escapeHtml(tr('demo.movies.button', 'Get recommendations')) + '</button>';
           html += '</form>';
           html += '<div class="project-detail__demo-result" id="demoResult" aria-live="polite"></div>';
         } else if (project.demoType === 'classifier') {
-          html += '<h3 class="project-detail__demo-title">Try the classifier (simulated)</h3>';
-          html += '<p class="project-detail__demo-desc">Select a sample to see how the classifier output would look. The real app runs locally with python predict.py.</p>';
+          html += '<h3 class="project-detail__demo-title">' + escapeHtml(tr('demo.classifier.title', 'Try the classifier (simulated)')) + '</h3>';
+          html += '<p class="project-detail__demo-desc">' + escapeHtml(tr('demo.classifier.desc', 'Select a sample to see how the classifier output would look. The real app runs locally with python predict.py.')) + '</p>';
           html += '<form class="project-detail__demo-form" id="demoForm">';
           html += '<div class="project-detail__demo-row">';
-          html += '<label class="project-detail__label">Sample image</label>';
+          html += '<label class="project-detail__label">' + escapeHtml(tr('demo.classifier.sample', 'Sample image')) + '</label>';
           html += '<select class="project-detail__select" name="sample" id="demoSample">';
           dc.samples.forEach(function(s) {
             html += '<option value="' + escapeHtml(s.value) + '">' + escapeHtml(s.label) + '</option>';
           });
           html += '</select>';
           html += '</div>';
-          html += '<button type="submit" class="btn btn--primary" id="demoSubmit">Classify</button>';
+          html += '<button type="submit" class="btn btn--primary" id="demoSubmit">' + escapeHtml(tr('demo.classifier.button', 'Classify')) + '</button>';
           html += '</form>';
           html += '<div class="project-detail__demo-result" id="demoResult" aria-live="polite"></div>';
         } else {
@@ -182,14 +190,14 @@
 
       if (project.howToRun) {
         html += '<div class="project-detail__section">';
-        html += '<h3 class="project-detail__section-title">How to run</h3>';
+        html += '<h3 class="project-detail__section-title">' + escapeHtml(tr('project.howToRun', 'How to run')) + '</h3>';
         html += '<div class="project-detail__code-block">' + escapeHtml(project.howToRun) + '</div>';
         html += '</div>';
       }
 
       if (project.exampleOutput) {
         html += '<div class="project-detail__section">';
-        html += '<h3 class="project-detail__section-title">Example output</h3>';
+        html += '<h3 class="project-detail__section-title">' + escapeHtml(tr('project.exampleOutput', 'Example output')) + '</h3>';
         html += '<div class="project-detail__code-block">' + escapeHtml(project.exampleOutput) + '</div>';
         html += '</div>';
       }
@@ -436,6 +444,9 @@
           }
         }
       }
+      document.addEventListener('languageChanged', function() {
+        window.location.reload();
+      });
     })();
   </script>
 </body>

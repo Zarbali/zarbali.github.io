@@ -52,6 +52,7 @@ class Navigation {
     this.navLinks.forEach(link => {
       link.addEventListener('click', (e) => {
         const href = link.getAttribute('href');
+        if (!href) return;
         
         // Check if it's an anchor link
         if (href.startsWith('#')) {
